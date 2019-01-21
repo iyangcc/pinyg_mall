@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>运营商后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="plugins/angularjs/pagination.css">
+    <!--<link rel="stylesheet" href="css/app.css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="plugins/select2/select2.css" />
+    <link rel="stylesheet" href="plugins/select2/select2-bootstrap.css" />
+
+
+</head>
+
+<body class="hold-transition skin-green sidebar-mini" ng-app="app">
+<div class="wrapper" style="min-height: 100%;">
+<!--<div ng-include="'main/app.html'"></div>-->
+    <!-- navbar -->
+    <div ng-include=" 'main/header.html' ">
+    </div>
+    <!-- / navbar -->
+
+    <!-- menu -->
+    <div ng-include=" 'main/nav_main.html' ">
+    </div>
+    <!-- / menu -->
+
+    <!-- content -->
+    <div class="content-wrapper">
+        <div ui-view></div>
+    </div>
+
+    <div ng-include=" 'main/footer.html' "></div>
+</div>
+<!--jQuery-->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="plugins/jQueryUI/jquery-ui.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/adminLTE/js/app.min.js"></script>
+
+<script src="plugins/angularjs/angular.min.js"></script>
+<script src="plugins/angularjs/pagination.js"></script>
+<script src="plugins/angularjs/angular-ui-router.js"></script>
+<script src="plugins/angularjs/angular-animate.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+
+<script src="js/config/app.js"></script>
+<script src="plugins/angularjs/angular-select2.js"></script>
+
+<script src="js/service/brandService.js"></script>
+<script src="js/service/specificationService.js"></script>
+<script src="js/service/typeTemplateService.js"></script>
+
+<script src="js/controller/brandController.js"></script>
+<script src="js/controller/specificationController.js"></script>
+<script src="js/controller/typeTemplateController.js"></script>
+</body>
+</html>
