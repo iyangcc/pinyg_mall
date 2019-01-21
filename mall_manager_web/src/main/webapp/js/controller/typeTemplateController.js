@@ -124,7 +124,8 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 
 	//json数据转字符串
 	$scope.jsonToString=function(jsonString,key){
-		var json=JSON.parse(jsonString);//将 json 字符串转换为 json 对象
+		//将 json 字符串转换为 json 对象
+		var json=JSON.parse(jsonString);
 		var value="";
 		for(var i=0;i<json.length;i++){
 			if(i>0){

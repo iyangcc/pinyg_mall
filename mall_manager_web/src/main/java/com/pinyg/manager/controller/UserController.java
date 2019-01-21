@@ -1,6 +1,9 @@
 package com.pinyg.manager.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -101,7 +104,6 @@ public class UserController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
 	 * @param page
 	 * @param rows
 	 * @return
@@ -110,5 +112,18 @@ public class UserController {
 	public PageResult search(@RequestBody TbUser user, int page, int rows  ){
 		return userService.findPage(user, page, rows);		
 	}
-	
+
+	/**
+	 * 用户登录
+	 * @return
+	 */
+	@RequestMapping("/getUserName")
+	public Map name(){
+		String name= SecurityContextHolder.getContext()
+				.getAuthentication().getName();
+		Map map=new HashMap();
+		map.put("userName", name);
+		return map ;
+	}
+
 }

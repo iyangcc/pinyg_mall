@@ -1,7 +1,5 @@
  //控制层 
-app.controller('userController' ,function($scope,$controller   ,userService){	
-	
-	$controller('baseController',{$scope:$scope});//继承
+app.controller('userController' ,function($scope,$controller ,userService){
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -75,5 +73,16 @@ app.controller('userController' ,function($scope,$controller   ,userService){
 			}			
 		);
 	}
-    
+
+	$scope.showLoginName=function(){
+		userService.getUserName().success(
+			function(response){
+				$scope.userName=response.userName;
+			}
+		);
+	};
+
+	$scope.showLoginName();
+
+
 });	
