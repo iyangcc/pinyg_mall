@@ -54,9 +54,9 @@
 										  <td><input  type="checkbox" name="ids" ng-click="updateSelection($event,template.id)"></td>
 										  <td>{{template.id}}</td>
 										  <td>{{template.name}}</td>
-										  <td>{{template.brandIds}}</td>
-										  <td>{{template.specIds}}</td>
-										  <td>{{template.customAttributeItems}}</td>
+										  <td>{{jsonToString(template.brandIds,"text")}}</td>
+										  <td>{{jsonToString(template.specIds,"text")}}</td>
+										  <td>{{jsonToString(template.customAttributeItems,"text")}}</td>
 		                                  <td class="text-center">
 		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(template.id)">修改</button>
 		                                  </td>
