@@ -41,7 +41,7 @@ public interface SellerService {
 	 * @param id
 	 * @return
 	 */
-	public TbSeller findOne(Long id);
+	public TbSeller findOne(String id);
 	
 	
 	/**
@@ -57,5 +57,12 @@ public interface SellerService {
 	 * @return
 	 */
 	public PageResult findPage(TbSeller seller, int pageNum, int pageSize);
+
+	/**
+	 * 更新状态
+	 * @param sellerId
+	 * @param status
+	 */
+	public void updateStatus(String sellerId,String status);
 	
 }

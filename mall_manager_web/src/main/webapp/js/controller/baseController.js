@@ -5,7 +5,7 @@ app.controller('baseController' ,function($scope){
     $scope.reloadList=function(){
     	//切换页码  
     	$scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);	   	
-    }
+    };
     
 	//分页控件配置 
 	$scope.paginationConf = {
@@ -28,6 +28,6 @@ app.controller('baseController' ,function($scope){
 			var idx = $scope.selectIds.indexOf(id);
             $scope.selectIds.splice(idx, 1);//删除 
 		}
-	}
+	};
 	
 });	

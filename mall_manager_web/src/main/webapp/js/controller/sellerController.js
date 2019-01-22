@@ -1,6 +1,7 @@
  //控制层 
 app.controller('sellerController' ,function($scope,$controller   ,sellerService){
-	
+	$controller('baseController',{$scope:$scope});//继承
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		sellerService.findAll().success(
@@ -73,5 +74,24 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 			}			
 		);
 	}
-    
+
+	//编辑
+	$scope.editSeller = function(seller){
+		$scope.item = seller;
+	};
+
+	//更新状态
+	$scope.updateStatus=function(sellerId,status){
+		sellerService.updateStatus(sellerId,status).success(
+			function(response){
+				if(response.success){
+					$scope.reloadList();
+				}else{
+					alert("失败");
+				}
+			}
+		);
+	}
+
+
 });	

@@ -1,9 +1,9 @@
  //控制层 
 app.controller('specificationController' ,function($scope,$controller ,specificationService){
+	$controller('baseController',{$scope:$scope});//继承
 
 	var _ajax = specificationService;
 	$scope.specificationList = [];
-	$scope.selectIds=[];
 	$scope.searchEntity={};
 	$scope.entity = {"specificationOptionList":[{}]};
 
@@ -36,16 +36,6 @@ app.controller('specificationController' ,function($scope,$controller ,specifica
 		);
 	};
 
-	//更新选择id数值
-	$scope.updateSelection = function($event, id) {
-		if($event.target.checked){
-			$scope.selectIds.push( id);
-		}else{
-			var idx = $scope.selectIds.indexOf(id);
-			$scope.selectIds.splice(idx, 1);
-		}
-	};
-
 	//批量删除
 	$scope.delete=function(){
 		_ajax.delete($scope.selectIds).success(
@@ -64,22 +54,6 @@ app.controller('specificationController' ,function($scope,$controller ,specifica
 				$scope.paginationConf.totalItems = result.total;
 			}
 		)
-	};
-
-	$scope.reloadList = function(){
-		//切换页码
-		$scope.search( $scope.paginationConf.currentPage,
-			$scope.paginationConf.itemsPerPage,$scope.searchEntity);
-	};
-
-	$scope.paginationConf = {
-		currentPage: 1,
-		totalItems: 10,
-		itemsPerPage: 10,
-		perPageOptions: [10, 20, 30, 40, 50],
-		onChange: function(){
-			$scope.reloadList();//重新加载
-		}
 	};
 
 	//编辑

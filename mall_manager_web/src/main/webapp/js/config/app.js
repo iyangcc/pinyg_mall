@@ -14,5 +14,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state("typeTemplate", {
         url:"/typeTemplate",
         templateUrl: "admin/type_template.html"
-        });
+        }).state("sellerAudit", {
+        url:"/sellerAudit",
+        templateUrl: "admin/seller_1.html"
+    });
 });

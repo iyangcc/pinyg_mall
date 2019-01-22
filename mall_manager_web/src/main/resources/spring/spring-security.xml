@@ -5,6 +5,7 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security.xsd">
 
@@ -47,20 +48,21 @@
 
     <!-- 切换成数据库中的用户名和密码 -->
     <security:authentication-manager>
+        <!---->
         <security:authentication-provider user-service-ref="userDetailService">
-            <!--<security:user-service>-->
-                <!--<security:user name="admin" password="123456" authorities="ROLE_ADMIN"/>-->
-            <!--</security:user-service>-->
+            <!--<security:user-service>
+                <security:user name="admin" password="123456" authorities="ROLE_ADMIN"/>
+            </security:user-service>-->
             <!-- 配置加密的方式 -->
             <!--<security:password-encoder ref="passwordEncoder"/>-->
         </security:authentication-provider>
     </security:authentication-manager>
 
-    <bean id="userDetailService" class="com.pinyg.service.impl.UserManagerServiceImpl">
+    <bean id="userDetailService" class="com.pinyg.service.UserManagerServiceImpl">
         <property name="userService" ref="userService"/>
     </bean>
 
-    <dubbo:application name="mall_manager_web" />
+    <dubbo:application name="mall_manager_web"/>
     <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
     <dubbo:reference id="userService" interface="com.pinyg.sellergoods.service.UserService"/>
 
