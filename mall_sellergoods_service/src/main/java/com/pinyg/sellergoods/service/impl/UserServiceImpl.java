@@ -135,4 +135,9 @@ public class UserServiceImpl implements UserService {
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
+	@Override
+	public TbUser findByUserName(TbUserExample userExample){
+		return userMapper.selectByExample(userExample).get(0);
+	}
+
 }

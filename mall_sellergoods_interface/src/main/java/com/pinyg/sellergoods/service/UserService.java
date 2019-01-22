@@ -2,6 +2,7 @@ package com.pinyg.sellergoods.service;
 import java.util.List;
 import com.pinyg.pojo.TbUser;
 
+import com.pinyg.pojo.TbUserExample;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -57,5 +58,12 @@ public interface UserService {
 	 * @return
 	 */
 	public PageResult findPage(TbUser user, int pageNum, int pageSize);
+
+	/**
+	 * 通过用户名查询
+	 * @param userExample
+	 * @return
+	 */
+	public TbUser findByUserName(TbUserExample userExample);
 	
 }

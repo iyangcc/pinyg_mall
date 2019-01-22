@@ -1,6 +1,10 @@
  //控制层 
 app.controller('sellerController' ,function($scope,$controller   ,sellerService){	
 
+	$scope.entity={
+		id:null
+	};
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		sellerService.findAll().success(
@@ -40,12 +44,11 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 		serviceObject.success(
 			function(response){
 				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
+					location.href='login.html';
 				}else{
 					alert(response.message);
 				}
-			}		
+			}
 		);				
 	}
 	

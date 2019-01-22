@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:security="http://www.springframework.org/schema/security"
@@ -10,23 +11,23 @@
 
     <security:global-method-security pre-post-annotations="enabled" jsr250-annotations="enabled" secured-annotations="enabled"></security:global-method-security>
 
-    <!-- 以下页面不被拦截 -->
+    &lt;!&ndash; 以下页面不被拦截 &ndash;&gt;
     <security:http pattern="/login.html" security="none"></security:http>
     <security:http pattern="/css/**" security="none"></security:http>
     <security:http pattern="/img/**" security="none"></security:http>
     <security:http pattern="/js/**" security="none"></security:http>
     <security:http pattern="/plugins/**" security="none"></security:http>
 
-    <!--
+    &lt;!&ndash;
     	配置具体的规则
     	auto-config="true"	不用自己编写登录的页面，框架提供默认登录页面
     	use-expressions="false"	是否使用SPEL表达式
-    -->
+    &ndash;&gt;
     <security:http auto-config="true" use-expressions="true">
-        <!-- 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" -->
+        &lt;!&ndash; 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" &ndash;&gt;
         <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN')"/>
 
-        <!-- 定义跳转的具体的页面 -->
+        &lt;!&ndash; 定义跳转的具体的页面 &ndash;&gt;
         <security:form-login
                 login-page="/login.html"
                 login-processing-url="/login.do"
@@ -39,20 +40,20 @@
             <security:frame-options policy="SAMEORIGIN"/>
         </security:headers>
 
-        <!-- 关闭跨域请求 -->
+        &lt;!&ndash; 关闭跨域请求 &ndash;&gt;
         <security:csrf disabled="true"/>
-        <!-- 退出 -->
+        &lt;!&ndash; 退出 &ndash;&gt;
         <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/login.html" />
     </security:http>
 
-    <!-- 切换成数据库中的用户名和密码 -->
+    &lt;!&ndash; 切换成数据库中的用户名和密码 &ndash;&gt;
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailService">
-            <!--<security:user-service>-->
-                <!--<security:user name="admin" password="123456" authorities="ROLE_ADMIN"/>-->
-            <!--</security:user-service>-->
-            <!-- 配置加密的方式 -->
-            <!--<security:password-encoder ref="passwordEncoder"/>-->
+            &lt;!&ndash;<security:user-service>&ndash;&gt;
+                &lt;!&ndash;<security:user name="admin" password="123456" authorities="ROLE_ADMIN"/>&ndash;&gt;
+            &lt;!&ndash;</security:user-service>&ndash;&gt;
+            &lt;!&ndash; 配置加密的方式 &ndash;&gt;
+            &lt;!&ndash;<security:password-encoder ref="passwordEncoder"/>&ndash;&gt;
         </security:authentication-provider>
     </security:authentication-manager>
 
@@ -64,6 +65,6 @@
     <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
     <dubbo:reference id="userService" interface="com.pinyg.sellergoods.service.UserService"/>
 
-        <!-- 配置加密类 -->
-    <!--<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>-->
-</beans>
+        &lt;!&ndash; 配置加密类 &ndash;&gt;
+    &lt;!&ndash;<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>&ndash;&gt;
+</beans>-->

@@ -1,8 +1,7 @@
-/*
 package com.pinyg.service.impl;
 
+import com.pinyg.sellergoods.service.UserService;
 import com.pinyg.service.UserManagerService;
-import com.pinyg.mapper.TbUserMapper;
 import com.pinyg.pojo.TbUser;
 import com.pinyg.pojo.TbUserExample;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,10 +15,10 @@ import java.util.Collection;
 
 public class UserManagerServiceImpl implements UserManagerService {
 
-    private TbUserMapper userMapper;
+    private UserService userService;
 
-    public void setUserMapper(TbUserMapper userMapper) {
-        this.userMapper = userMapper;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class UserManagerServiceImpl implements UserManagerService {
             TbUserExample example=new TbUserExample();
             TbUserExample.Criteria criteria = example.createCriteria();
             criteria.andNameEqualTo(username);
-            user = userMapper.selectByExample(example).get(0);
+            user = userService.findByUserName(example);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,16 +37,9 @@ public class UserManagerServiceImpl implements UserManagerService {
         return u;
     }
 
-    */
-/**
-     * 设置权限
-     * @return
-     *//*
-
     private Collection<? extends GrantedAuthority> getAuthority() {
         ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return list;
     }
 }
-*/
