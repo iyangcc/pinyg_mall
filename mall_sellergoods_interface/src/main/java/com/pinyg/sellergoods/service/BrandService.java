@@ -18,12 +18,12 @@ public interface BrandService {
 
     /**
      * 分页条件查询
-     * @param current
-     * @param size
+     * @param page
+     * @param rows
      * @param brand
      * @return
      */
-    PageResult findPage(int current, int size,TbBrand brand);
+    PageResult findPage(TbBrand brand, int page, int rows);
 
     /**
      * 品牌下拉列表

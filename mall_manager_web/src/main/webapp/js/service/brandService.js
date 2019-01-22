@@ -25,8 +25,8 @@ app.service('brandService',function($http){
         return $http.get('../brand/delete.do?ids='+ids);
     }
     //搜索
-    this.search=function(page,size,data){
-        return $http.post('../brand/search.do?page='+page+"&size="+size, data);
+    this.search=function(page,rows,data){
+        return $http.post('../brand/search.do?page='+page+"&rows="+rows, data);
     }
     //下拉列表数据
     this.selectOptionList=function(){

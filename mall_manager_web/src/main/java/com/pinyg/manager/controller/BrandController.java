@@ -25,8 +25,8 @@ public class BrandController {
     }
 
     @RequestMapping("search")
-    public PageResult findPage(int page, int size,@RequestBody TbBrand brand) {
-        return service.findPage(page, size, brand);
+    public PageResult findPage(@RequestBody TbBrand brand,int page, int rows) {
+        return service.findPage(brand , page, rows);
     }
 
     @RequestMapping("add")

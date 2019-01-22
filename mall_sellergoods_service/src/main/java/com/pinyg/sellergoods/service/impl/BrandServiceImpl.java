@@ -26,8 +26,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public PageResult findPage(int current, int size, TbBrand brand){
-        PageHelper.startPage(current,size);
+    public PageResult findPage(TbBrand brand, int page, int rows){
+        PageHelper.startPage(page,rows);
         TbBrandExample example=new TbBrandExample();
         Criteria criteria = example.createCriteria();
         if (brand!=null) {
@@ -38,8 +38,8 @@ public class BrandServiceImpl implements BrandService {
                 criteria.andFirstCharEqualTo(brand.getFirstChar());
             }
         }
-        Page<TbBrand> page = (Page<TbBrand>) mapper.selectByExample(example);
-        return new PageResult(page.getTotal(),page.getResult());
+        Page<TbBrand> pageInfo = (Page<TbBrand>) mapper.selectByExample(example);
+        return new PageResult(pageInfo.getTotal(),pageInfo.getResult());
     }
 
     @Override

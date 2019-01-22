@@ -15,8 +15,8 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 	$scope.brandList={data:[]};
 	$scope.specList={data:[]};
 
-	$scope.search = function(page,size,data){
-		_ajax.search(page,size,data).success(
+	$scope.search = function(page,size){
+		_ajax.search(page,size,$scope.searchEntity).success(
 			function (result) {
 				$scope.templateList = result.rows;
 				$scope.paginationConf.totalItems = result.total;

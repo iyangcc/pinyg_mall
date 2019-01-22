@@ -1,4 +1,4 @@
-app.controller('brandController',function($scope,$http,brandService){
+app.controller('brandController',function($scope,$controller,brandService){
     $controller('baseController',{$scope:$scope});//继承
 
     var _ajax = brandService;
@@ -6,8 +6,8 @@ app.controller('brandController',function($scope,$http,brandService){
     $scope.entity = {};
     $scope.searchEntity={};
 
-    $scope.search = function(page,size,data){
-        _ajax.search(page,size,data).success(
+    $scope.search = function(page,rows){
+        _ajax.search(page,rows,$scope.searchEntity).success(
             function (result) {
                 $scope.brandList = result.rows;
                 $scope.paginationConf.totalItems = result.total;

@@ -47,8 +47,8 @@ app.controller('specificationController' ,function($scope,$controller ,specifica
 		);
 	};
 
-	$scope.search = function(page,size,data){
-		_ajax.search(page,size,data).success(
+	$scope.search = function(page,size){
+		_ajax.search(page,size,$scope.searchEntity).success(
 			function (result) {
 				$scope.specificationList = result.rows;
 				$scope.paginationConf.totalItems = result.total;
