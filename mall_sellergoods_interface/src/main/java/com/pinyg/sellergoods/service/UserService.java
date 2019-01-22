@@ -39,10 +39,10 @@ public interface UserService {
 
 	/**
 	 * 根据ID获取实体
-	 * @param id
+	 * @param username
 	 * @return
 	 */
-	public TbUser findOne(Long id);
+	public TbUser findOne(String username);
 	
 	
 	/**
@@ -59,11 +59,4 @@ public interface UserService {
 	 */
 	public PageResult findPage(TbUser user, int pageNum, int pageSize);
 
-	/**
-	 * 通过用户名查询
-	 * @param userExample
-	 * @return
-	 */
-	public TbUser findByUserName(TbUserExample userExample);
-	
 }

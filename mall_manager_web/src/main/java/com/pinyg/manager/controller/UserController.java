@@ -78,12 +78,12 @@ public class UserController {
 	
 	/**
 	 * 获取实体
-	 * @param id
+	 * @param username
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbUser findOne(Long id){
-		return userService.findOne(id);		
+	public TbUser findOne(String username){
+		return userService.findOne(username);
 	}
 	
 	/**

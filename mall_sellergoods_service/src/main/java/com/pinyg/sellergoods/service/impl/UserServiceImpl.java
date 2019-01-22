@@ -62,12 +62,16 @@ public class UserServiceImpl implements UserService {
 	
 	/**
 	 * 根据ID获取实体
-	 * @param id
+	 * @param username
 	 * @return
 	 */
 	@Override
-	public TbUser findOne(Long id){
-		return userMapper.selectByPrimaryKey(id);
+	public TbUser findOne(String username){
+		TbUserExample example=new TbUserExample();
+		TbUserExample.Criteria criteria = example.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		List<TbUser> tbUsers = userMapper.selectByExample(example);
+		return tbUsers.size()>0?tbUsers.get(0):null;
 	}
 
 	/**
@@ -133,11 +137,6 @@ public class UserServiceImpl implements UserService {
 		
 		Page<TbUser> page= (Page<TbUser>)userMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
-	}
-
-	@Override
-	public TbUser findByUserName(TbUserExample userExample){
-		return userMapper.selectByExample(userExample).get(0);
 	}
 
 }

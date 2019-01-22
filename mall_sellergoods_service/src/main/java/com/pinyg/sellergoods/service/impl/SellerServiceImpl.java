@@ -66,8 +66,7 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public TbSeller findOne(String id){
-//		return sellerMapper.selectByPrimaryKey(id);
-		return null;
+		return sellerMapper.selectByPrimaryKey(id);
 	}
 
 	/**

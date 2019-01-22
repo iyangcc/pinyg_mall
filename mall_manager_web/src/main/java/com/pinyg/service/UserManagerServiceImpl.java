@@ -2,7 +2,6 @@ package com.pinyg.service;
 
 import com.pinyg.sellergoods.service.UserService;
 import com.pinyg.pojo.TbUser;
-import com.pinyg.pojo.TbUserExample;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -25,10 +24,7 @@ public class UserManagerServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         TbUser user = null;
         try {
-            TbUserExample example=new TbUserExample();
-            TbUserExample.Criteria criteria = example.createCriteria();
-            criteria.andUsernameEqualTo(username);
-            user = userService.findByUserName(example);
+            user = userService.findOne(username);
         } catch (Exception e) {
             e.printStackTrace();
         }

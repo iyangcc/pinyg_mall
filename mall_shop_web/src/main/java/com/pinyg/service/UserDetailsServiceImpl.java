@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -22,20 +22,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //构建角色列表
-        List<GrantedAuthority> grantAuths=new ArrayList();
-        grantAuths.add(new SimpleGrantedAuthority("ROLE_SELLER"));
-
-        //得到商家对象
-        TbSeller seller = sellerService.findOne(username);
-        if(seller!=null){
-            if(seller.getStatus().equals("1")){
-                return new User(username,seller.getPassword(),grantAuths);
-            }else{
-                return null;
-            }
-        }else{
-            return null;
+        TbSeller seller = null;
+        try {
+            seller = sellerService.findOne(username);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        //查询到的用户封装为UserDetails
+        User u = new User(seller.getSellerId(),seller.getPassword(),seller.getStatus()=="0"?false:true,true,true,true, getAuthority());
+        return u;
+    }
+
+    private Collection<? extends GrantedAuthority> getAuthority() {
+        ArrayList<SimpleGrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_SELLER"));
+        return list;
     }
 }
