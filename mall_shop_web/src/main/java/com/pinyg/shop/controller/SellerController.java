@@ -5,12 +5,15 @@ import com.pinyg.pojo.TbSeller;
 import com.pinyg.sellergoods.service.SellerService;
 import entity.PageResult;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * controller
@@ -116,6 +119,19 @@ public class SellerController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
+	}
+
+	/**
+	 * 用户登录
+	 * @return
+	 */
+	@RequestMapping("/getUserName")
+	public Map name(){
+		String name= SecurityContextHolder.getContext()
+				.getAuthentication().getName();
+		Map map=new HashMap();
+		map.put("userName", name);
+		return map ;
 	}
 	
 }

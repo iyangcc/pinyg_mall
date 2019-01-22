@@ -76,5 +76,15 @@ app.controller('sellerController' ,function($scope,$controller   ,sellerService)
 			}			
 		);
 	}
+
+	$scope.showLoginName=function(){
+		sellerService.getUserName().success(
+			function(response){
+				$scope.userName=response.userName;
+			}
+		);
+	};
+
+	$scope.showLoginName();
     
 });	
