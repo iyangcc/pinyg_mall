@@ -1,34 +1,5 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <!-- 页面meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>商品编辑</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-  
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-    
-    <!-- 富文本编辑器 -->
-	<link rel="stylesheet" href="../plugins/kindeditor/themes/default/default.css" />
-	<script charset="utf-8" src="../plugins/kindeditor/kindeditor-min.js"></script>
-	<script charset="utf-8" src="../plugins/kindeditor/lang/zh_CN.js"></script>
-    
-    
-      
-    
-    
-</head>
-
-<body class="hold-transition skin-red sidebar-mini" >
-
+<div class="box box-primary" style="background:#ececec;margin-bottom: 0;border: none" ng-controller="goodsController">
             <!-- 正文区域 -->
             <section class="content">
 
@@ -40,7 +11,7 @@
                         <!--tab头-->
                         <ul class="nav nav-tabs">                       		
                             <li class="active">
-                                <a href="#home" data-toggle="tab">商品基本信息</a>                                                        
+                                <a href="#main" data-toggle="tab">商品基本信息</a>
                             </li>   
                             <li >
                                 <a href="#pic_upload" data-toggle="tab">商品图片</a>                                                        
@@ -58,7 +29,7 @@
                         <div class="tab-content">
 
                             <!--表单内容-->
-                            <div class="tab-pane active" id="home">
+                            <div class="tab-pane active" id="main">
                                 <div class="row data-type">                                  
 								   <div class="col-md-2 title">商品分类</div>
 		                          
@@ -109,7 +80,7 @@
 		                           
 		                           <div class="col-md-2 title editer">商品介绍</div>
                                    <div class="col-md-10 data editer">
-                                       <textarea name="content" style="width:800px;height:400px;visibility:hidden;" ></textarea>
+                                       <textarea name="content" style="width:100%;height:400px;visibility:hidden;" ></textarea>
                                    </div>
 		                           
 		                           <div class="col-md-2 title rowHeight2x">包装列表</div>
@@ -336,10 +307,10 @@
 						<!--表单内容/-->
 							 
                     </div>
-                 	
-                 	
-                 	
-                 	
+
+
+
+
                    </div>
                   <div class="btn-toolbar list-toolbar">
 				      <button class="btn btn-primary" ><i class="fa fa-save"></i>保存</button>
@@ -393,19 +364,6 @@
 	</div>
 </div>
 
-            
+</div>
             <!-- 正文区域 /-->
-<script type="text/javascript">
 
-	var editor;
-	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="content"]', {
-			allowFileManager : true
-		});
-	});
-
-</script>
-       
-</body>
-
-</html>

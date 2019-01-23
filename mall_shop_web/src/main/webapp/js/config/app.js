@@ -5,5 +5,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state("home", {
             url: "/home",
             templateUrl: "admin/home.html"
-        });
+        }).state("goodsEdit", {
+        url: "/goodsEdit",
+        templateUrl: "admin/goods_edit.html"
+    });
 });

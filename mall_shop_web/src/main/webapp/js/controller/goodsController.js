@@ -1,5 +1,12 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller ,goodsService){
+
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			allowFileManager : true
+		});
+	});
 
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -8,7 +15,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -40,8 +47,8 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 		serviceObject.success(
 			function(response){
 				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
+					alert('保存成功');
+					$scope.entity={};
 				}else{
 					alert(response.message);
 				}
