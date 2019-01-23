@@ -17,5 +17,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state("sellerAudit", {
         url:"/sellerAudit",
         templateUrl: "admin/seller_1.html"
+        }).state("itemCat", {
+        url:"/itemCat",
+        templateUrl: "admin/item_cat.html"
     });
 });

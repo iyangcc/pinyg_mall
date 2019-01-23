@@ -1,6 +1,5 @@
 package com.pinyg.mapper;
 
-import com.pinyg.pojo.Specification;
 import com.pinyg.pojo.TbSpecification;
 import com.pinyg.pojo.TbSpecificationExample;
 import org.apache.ibatis.annotations.Param;

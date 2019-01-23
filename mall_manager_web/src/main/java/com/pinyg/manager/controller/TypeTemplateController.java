@@ -1,5 +1,6 @@
 package com.pinyg.manager.controller;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,5 +111,13 @@ public class TypeTemplateController {
 	public PageResult search(@RequestBody TbTypeTemplate typeTemplate, int page, int size  ){
 		return typeTemplateService.findPage(typeTemplate, page, size);
 	}
-	
+
+	/**
+	 * 查询规格列表
+	 * @return
+	 */
+	@RequestMapping("/selectTypeList")
+	public List<Map> selectTypeList(){
+		return typeTemplateService.selectTypeList();
+	}
 }
