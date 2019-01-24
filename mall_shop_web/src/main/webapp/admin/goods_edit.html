@@ -1,5 +1,5 @@
 
-<div class="box box-primary" style="background:#ececec;margin-bottom: 0;border: none" ng-controller="goodsController">
+<div class="box box-primary" style="background:#ececec;margin-bottom: 0;border: none" ng-controller="goodsController" ng-init="selectItemCat1List()">
             <!-- 正文区域 -->
             <section class="content">
 
@@ -30,24 +30,32 @@
 
                             <!--表单内容-->
                             <div class="tab-pane active" id="main">
-                                <div class="row data-type">                                  
+                                <div class="row data-type">
 								   <div class="col-md-2 title">商品分类</div>
 		                          
-		                           	  <div class="col-md-10 data">
-		                           	  	<table>
+		                           	  <div class="col-md-10 row data">
+		                           	  	<table width="100%">
 		                           	  		<tr>
-		                           	  			<td>
-		                           	  				<select class="form-control" >														
+		                           	  			<td class="col-md-3">
+		                           	  				<select class="form-control" ng-model="entity.goods.category1Id">
+														<option value="">-- 请选择一级 --</option>
+														<option ng-repeat="item in itemCat1List" value="{{item.id}}">{{item.name}}</option>
 		                           	  				</select>
 		                              			</td>
-		                              			<td>
-		                           	  				<select class="form-control select-sm" ></select>
+		                              			<td class="col-md-3">
+		                           	  				<select class="form-control select-sm" ng-model="entity.goods.category2Id">
+														<option value="">-- 请选择二级 --</option>
+														<option ng-repeat="item in itemCat2List" value="{{item.id}}">{{item.name}}</option>
+													</select>
+		                              			</td>
+		                              			<td class="col-md-3">
+		                           	  				<select class="form-control select-sm" ng-model="entity.goods.category3Id">
+														<option value="">-- 请选择三级 --</option>
+														<option ng-repeat="item in itemCat3List" value="{{item.id}}">{{item.name}}</option>
+													</select>
 		                              			</td>
 		                              			<td>
-		                           	  				<select class="form-control select-sm" ></select>
-		                              			</td>
-		                              			<td>
-		                           	  				模板ID:19
+		                           	  				模板ID：{{entity.goods.typeTemplateId}}
 		                              			</td>
 		                           	  		</tr>
 		                           	  	</table>
@@ -62,7 +70,10 @@
 		                           
 		                           <div class="col-md-2 title">品牌</div>
 		                           <div class="col-md-10 data">
-		                              <select class="form-control" ></select>
+									   <select class="form-control select-sm" ng-model="entity.goods.brandId">
+										   <option value="">-- 请选择品牌 --</option>
+										   <option ng-repeat="item in typeTemplate.brandIds" value="{{item.id}}">{{item.text}}</option>
+									   </select>
 		                           </div>
 		
 								   <div class="col-md-2 title">副标题</div>
@@ -132,19 +143,13 @@
                            
                             <!--扩展属性-->
                             <div class="tab-pane" id="customAttribute">
-                                <div class="row data-type">                                
-	                                <div>
-		                                <div class="col-md-2 title">扩展属性1</div>
+                                <div class="row data-type">
+	                                <div ng-repeat="pojo in entity.goodsDesc.customAttributeItems">
+		                                <div class="col-md-2 title">{{pojo.text}}</div>
 				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性1">	            	 
+				                              <input class="form-control" ng-model="pojo.value" placeholder="{{pojo.text}}">
 				                        </div>
-	                                </div>       
-									<div>
-		                                <div class="col-md-2 title">扩展属性2</div>
-				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性2">	            	 
-				                        </div>
-	                                </div>  									
+	                                </div>
                                 </div>
                             </div>
                       
@@ -162,38 +167,16 @@
                             	
 	                                <div class="row data-type">
 	                                
-		                                <div>
-			                                <div class="col-md-2 title">屏幕尺寸</div>
+		                                <div ng-repeat="pojo in specList">
+			                                <div class="col-md-2 title">{{pojo.text}}</div>
 					                        <div class="col-md-10 data">
 					                               
-					                            <span>
-					                            	<input  type="checkbox" >4.0					                            				                            	
+					                            <span ng-repeat="option in pojo.options">
+					                            	<input  type="checkbox" >{{option.optionName}}
 					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >4.5					                            				                            	
-					                            </span>
-												<span>
-					                            	<input  type="checkbox" >5.0					                            				                            	
-					                            </span>												
-					                            	
+
 					                        </div>
-		                                </div>   
-										<div>
-			                                <div class="col-md-2 title">网络制式</div>
-					                        <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input  type="checkbox" >2G					                            				                            	
-					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >3G					                            				                            	
-					                            </span>
-												<span>
-					                            	<input  type="checkbox" >4G					                            				                            	
-					                            </span>												
-					                            	
-					                        </div>
-		                                </div>  
+		                                </div>
 		                                                                                  
 	                                </div>
 	

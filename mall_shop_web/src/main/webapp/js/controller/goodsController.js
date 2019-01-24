@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller ,goodsService,uploadService){
+app.controller('goodsController' ,function($scope,$controller ,goodsService,itemCatService,uploadService,typeTemplateService){
 
 	var editor;
 	KindEditor.ready(function(K) {
@@ -21,14 +21,14 @@ app.controller('goodsController' ,function($scope,$controller ,goodsService,uplo
 			}			
 		);
 	};
-	
+
 	//分页
 	$scope.findPage=function(page,rows){			
 		goodsService.findPage(page,rows).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.list=response.rows;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
+			}
 		);
 	}
 	
@@ -105,11 +105,69 @@ app.controller('goodsController' ,function($scope,$controller ,goodsService,uplo
 	//将当前上传的图片实体存入图片列表
 	$scope.add_image_entity=function(){
 		$scope.entity.goodsDesc.itemImages.push($scope.image_entity);
-	}
+	};
 
 	//移除图片
 	$scope.remove_image_entity=function(index){
 		$scope.entity.goodsDesc.itemImages.splice(index,1);
-	}
+		$scope.deleteImage();
+	};
+
+	$scope.deleteImage=function () {
+		goodsService.deleteImage().success(
+			function(response){
+
+			}
+		);
+	};
+
+	//读取一级分类
+	$scope.selectItemCat1List=function() {
+		itemCatService.findByParentId(0).success(
+			function (result) {
+				$scope.itemCat1List=result;
+			});
+	};
+
+	//读取二级分类
+	$scope.$watch('entity.goods.category1Id', function(n, o) {
+		itemCatService.findByParentId(n).success(
+			function (result) {
+				$scope.itemCat2List=result;
+			});
+	});
+
+	//读取二级分类
+	$scope.$watch('entity.goods.category2Id', function(n, o) {
+		itemCatService.findByParentId(n).success(
+			function (result) {
+				$scope.itemCat3List=result;
+			});
+	});
+
+	//读取三级分类
+	$scope.$watch('entity.goods.category3Id', function(n, o) {
+		itemCatService.findOne(n).success(
+			function (result) {
+				$scope.entity.goods.typeTemplateId=result.typeId;
+			});
+	});
+
+	//模板ID选择后  更新品牌列表
+	$scope.$watch('entity.goods.typeTemplateId', function(n, o) {
+		typeTemplateService.findOne(n).success(
+			function(response){
+				$scope.typeTemplate=response;//获取类型模板
+				$scope.typeTemplate.brandIds= JSON.parse( $scope.typeTemplate.brandIds);//品牌列表
+				$scope.entity.goodsDesc.customAttributeItems=JSON.parse($scope.typeTemplate.customAttributeItems);
+			}
+		);
+		//查询规格列表
+		typeTemplateService.findSpecList(n).success(
+			function(response){
+				$scope.specList=response;
+			}
+		);
+	});
 
 });
