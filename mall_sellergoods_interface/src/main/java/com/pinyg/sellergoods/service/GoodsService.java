@@ -1,5 +1,7 @@
 package com.pinyg.sellergoods.service;
 import java.util.List;
+
+import com.alibaba.dubbo.common.json.ParseException;
 import com.pinyg.pojo.TbGoods;
 
 import com.pinyg.pojogroup.Goods;
@@ -28,7 +30,7 @@ public interface GoodsService {
 	/**
 	 * 增加
 	*/
-	public void add(Goods goods);
+	public void add(Goods goods) throws ParseException;
 	
 	
 	/**
@@ -42,7 +44,7 @@ public interface GoodsService {
 	 * @param id
 	 * @return
 	 */
-	public TbGoods findOne(Long id);
+	public Goods findOne(Long id);
 	
 	
 	/**

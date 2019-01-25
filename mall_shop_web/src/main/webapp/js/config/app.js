@@ -7,6 +7,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "admin/home.html"
         }).state("goodsEdit", {
         url: "/goodsEdit",
+        params:{"id":null},
         templateUrl: "admin/goods_edit.html"
+        }).state("goods", {
+        url: "/goods",
+        templateUrl: "admin/goods.html"
     });
 });

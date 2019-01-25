@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller ,goodsService,itemCatService,uploadService,typeTemplateService){
+app.controller('goodsController' ,function($scope,$controller ,$stateParams,$location,goodsService,itemCatService,uploadService,typeTemplateService){
 	$controller('baseController',{$scope:$scope});//继承
 
 	var editor;
@@ -34,14 +34,24 @@ app.controller('goodsController' ,function($scope,$controller ,goodsService,item
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(){
+		var id=$stateParams.id;//获取参数值
+		if(id==null){
+			return ;
+		}
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				//向富文本编辑器添加商品介绍
+				editor.html($scope.entity.goodsDesc.introduction);
+				//显示图片列表
+				$scope.entity.goodsDesc.itemImages=
+					JSON.parse($scope.entity.goodsDesc.itemImages);
+
 			}
 		);				
-	}
-	
+	};
+
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
@@ -79,7 +89,7 @@ app.controller('goodsController' ,function($scope,$controller ,goodsService,item
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
-	$scope.search=function(page,rows){			
+	$scope.search=function(page,rows){
 		goodsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.rows;	

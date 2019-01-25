@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <!-- 页面meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>商品管理</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
-    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
- 
-</head>
-
-<body class="hold-transition skin-red sidebar-mini" >
-  <!-- .box-body -->
-                
+<div class="box box-primary" style="margin-bottom: 0;border: none" ng-controller="goodsManagerController" ng-init="findItemCatList()">
+	<!-- 正文区域 -->
+	<section class="content">
                     <div class="box-header with-border">
                         <h3 class="box-title">商品管理</h3>
                     </div>
@@ -41,19 +22,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                  状态：<select>
-                                         	<option value="">全部</option>      
-                                         	<option value="0">未申请</option>    
-                                         	<option value="1">申请中</option>    
-                                         	<option value="2">审核通过</option>    
-                                         	<option value="3">已驳回</option>                                     
-                                        </select>
-							                  商品名称：<input >									
-									<button class="btn btn-default" >查询</button>                                    
-                                </div>
-                            </div>
+							<div class="box-tools pull-right">
+								<div class="has-feedback">
+									<label class="col-md-2 control-label text-right" style="margin-top: 5px;"> 状态：</label>
+									<div class="col-md-3">
+										<select class="form-control" ng-model="searchEntity.auditStatus">
+											<option value="">全部</option>
+											<option value="0">未审核</option>
+											<option value="1">已审核</option>
+											<option value="2">未通过</option>
+											<option value="3">已关闭</option>
+										</select>
+									</div>
+									<label for="goodsName" class="col-md-2 control-label text-right" style="margin-top: 5px;">商品名称：</label>
+									<div class="col-md-3">
+										<input id="goodsName" class="form-control" ng-model="searchEntity.goodsName">
+									</div>
+									<div class="col-md-2">
+										<button  class="btn btn-default" ng-click="reloadList()">查询</button>
+									</div>
+
+								</div>
+							</div>
                             <!--工具栏/-->
 
 			                  <!--数据列表-->
@@ -74,44 +64,29 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
-			                              <td><input  type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>小米6S手机</td>
-									      <td>1090</td>
-									      <td>数码</td>
-									      <td>手机</td>
-									      <td>国产手机</td>
-		                                  <td>
-		                                  	<span>
-		                                  		未申请
-		                                  	</span>
-		                                  	<span >
-		                                  		申请中
-		                                  	</span>
-		                                  	<span>
-		                                  		审核通过
-		                                  	</span>
-		                                  	<span>
-		                                  		已驳回
-		                                  	</span>
-		                                  </td>		                                  
-		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs">修改</button>                  
+			                          <tr ng-repeat="entity in list">
+			                              <td><input  type="checkbox"></td>
+										  <td>{{entity.id}}</td>
+										  <td>{{entity.goodsName}}</td>
+										  <td>{{entity.price}}</td>
+										  <td>{{itemCatList[entity.category1Id]}}</td>
+										  <td>{{itemCatList[entity.category2Id]}}</td>
+										  <td>{{itemCatList[entity.category3Id]}}</td>
+										  <td>
+											  {{status[entity.auditStatus]}}
+										  </td>
+										  <td class="text-center">
+		                                 	  <button type="button" class="btn bg-olive btn-xs" ng-click="goGoodsEdit(entity.id)">修改</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>
 			                  </table>
-			                  <!--数据列表/-->                        
-							  
-							 
+			                  <!--数据列表/-->
+
                         </div>
                         <!-- 数据表格 /-->
-                        
-                        
+						<tm-pagination conf="paginationConf"></tm-pagination>
                      </div>
                     <!-- /.box-body -->
-		
-</body>
-
-</html>
+	</section>
+</div>
