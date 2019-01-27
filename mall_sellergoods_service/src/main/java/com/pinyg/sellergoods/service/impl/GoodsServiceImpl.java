@@ -75,8 +75,11 @@ public class GoodsServiceImpl implements GoodsService {
 		goodsMapper.insert(goods.getGoods());
 		goods.getGoodsDesc().setGoodsId(goods.getGoods().getId());//设置ID
 		goodsDescMapper.insert(goods.getGoodsDesc());//插入商品扩展数据
-		String title = goods.getGoods().getGoodsName();
+		saveItemList(goods);
+	}
 
+	private void saveItemList(Goods goods) {
+		String title = goods.getGoods().getGoodsName();
 		if("1".equals(goods.getGoods().getIsEnableSpec())){
 			//保存规格信息
 			for (TbItem item : goods.getItemList()) {
@@ -98,7 +101,6 @@ public class GoodsServiceImpl implements GoodsService {
 			setItemValus(goods,item);
 			itemMapper.insert(item);
 		}
-
 	}
 
 	private void setItemValus(Goods goods,TbItem item) {
@@ -127,10 +129,20 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 修改
 	 */
 	@Override
-	public void update(TbGoods goods){
-		goodsMapper.updateByPrimaryKey(goods);
-	}	
-	
+	public void update(Goods goods){
+		goods.getGoods().setAuditStatus("0");//设置未申请状态:如果是经过修改的商品，需要重新设置状态
+		goodsMapper.updateByPrimaryKey(goods.getGoods());//保存商品列表
+		goodsDescMapper.updateByPrimaryKey(goods.getGoodsDesc());//保存商品扩展列表
+		//删除原有的sku列表
+		TbItemExample example = new TbItemExample();
+		TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdEqualTo(goods.getGoods().getId());
+		itemMapper.deleteByExample(example);
+		//添加新的sku列表
+		saveItemList(goods);
+	}
+
+
 	/**
 	 * 根据ID获取实体
 	 * @param id
@@ -143,6 +155,13 @@ public class GoodsServiceImpl implements GoodsService {
 		goods.setGoods(tbGoods);
 		TbGoodsDesc tbGoodsDesc = goodsDescMapper.selectByPrimaryKey(id);
 		goods.setGoodsDesc(tbGoodsDesc);
+		//查询SKU商品列表
+		TbItemExample example=new TbItemExample();
+		TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdEqualTo(id);//查询条件：商品ID
+		List<TbItem> itemList = itemMapper.selectByExample(example);
+		goods.setItemList(itemList);
+
 		return goods;
 	}
 

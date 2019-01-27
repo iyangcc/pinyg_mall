@@ -172,7 +172,7 @@
 					                        <div class="col-md-10 data">
 					                               
 					                            <span ng-repeat="option in pojo.options">
-					                            	<input  type="checkbox" ng-click="updateSpecAttribute($event,pojo.text,option.optionName);createItemList()">{{option.optionName}}
+					                            	<input  type="checkbox" ng-click="updateSpecAttribute($event,pojo.text,option.optionName);createItemList()" ng-checked="checkAttributeValue(pojo.text,option.optionName)">{{option.optionName}}
 					                            </span>  	
 
 					                        </div>
@@ -230,7 +230,7 @@
                   <div class="btn-toolbar list-toolbar clearfix">
 					  <div class="pull-right">
 						  <button class="btn btn-primary " ng-click="save()"><i class="fa fa-save"></i> 保存</button>
-						  <button class="btn btn-default " >返回列表</button>
+						  <a class="btn btn-default " href="#goods">返回列表</a>
 					  </div>
 				  </div>
 			

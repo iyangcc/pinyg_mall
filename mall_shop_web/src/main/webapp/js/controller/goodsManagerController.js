@@ -29,6 +29,4 @@ app.controller('goodsManagerController' ,function($scope,$controller ,$state,goo
     $scope.goGoodsEdit=function(id){
         $state.go("goodsEdit",{id:id});
     }
-
-
     });

@@ -1,11 +1,16 @@
  //品牌控制层 
-app.controller('baseController' ,function($scope){	
+app.controller('baseController' ,function($scope,$state,$stateParams){
 	
     //重新加载列表 数据
     $scope.reloadList=function(){
     	//切换页码  
     	$scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);	   	
     };
+
+	$scope.reloadCurPage =function(value){
+		$stateParams.id=null;
+		$state.reload(value);
+	};
     
 	//分页控件配置 
 	$scope.paginationConf = {
