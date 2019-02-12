@@ -18,6 +18,7 @@ import com.pinyg.pojo.TbGoodsExample.Criteria;
 import com.pinyg.sellergoods.service.GoodsService;
 
 import entity.PageResult;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 服务实现层
@@ -25,6 +26,7 @@ import entity.PageResult;
  *
  */
 @Service
+@Transactional
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
@@ -171,21 +173,26 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void delete(Long[] ids) {
 		for(Long id:ids){
-			goodsMapper.deleteByPrimaryKey(id);
-		}		
+			TbGoods goods = goodsMapper.selectByPrimaryKey(id);
+			goods.setIsDelete("1");
+			goodsMapper.updateByPrimaryKey(goods);
+		}
 	}
-	
-	
-		@Override
+
+
+
+	@Override
 	public PageResult findPage(TbGoods goods, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 
 		TbGoodsExample example=new TbGoodsExample();
 		Criteria criteria = example.createCriteria();
+		criteria.andIsDeleteIsNull();//非删除状态
 		
 		if(goods!=null){			
 			if(goods.getSellerId()!=null && goods.getSellerId().length()>0){
-				criteria.andSellerIdLike(goods.getSellerId());
+//				criteria.andSellerIdLike("%"+goods.getSellerId()+"%");
+				criteria.andSellerIdEqualTo(goods.getSellerId());
 			}
 			if(goods.getGoodsName()!=null && goods.getGoodsName().length()>0){
 				criteria.andGoodsNameLike("%"+goods.getGoodsName()+"%");
@@ -214,5 +221,14 @@ public class GoodsServiceImpl implements GoodsService {
 		Page<TbGoods> page= (Page<TbGoods>)goodsMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	public void updateStatus(Long[] ids, String status) {
+		for(Long id:ids){
+			TbGoods goods = goodsMapper.selectByPrimaryKey(id);
+			goods.setAuditStatus(status);
+			goodsMapper.updateByPrimaryKey(goods);
+		}
+	}
+
+
 }

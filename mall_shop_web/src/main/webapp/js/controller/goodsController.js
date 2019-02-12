@@ -57,7 +57,7 @@ app.controller('goodsController' ,function($scope,$controller ,$state,$statePara
 	$scope.save=function(){				
 		var serviceObject;//服务层对象
 		$scope.entity.goodsDesc.introduction=editor.html();
-		if($scope.entity.id!=null){//如果有ID
+		if($scope.entity.goods.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
 			serviceObject=goodsService.add( $scope.entity  );//增加 
@@ -66,8 +66,10 @@ app.controller('goodsController' ,function($scope,$controller ,$state,$statePara
 			function(response){
 				if(response.success){
 					alert('保存成功');
-					$scope.entity={};
-					editor.html('');//清空富文本编辑器
+					if($scope.entity.goods.id==null){
+						$scope.entity={};
+						editor.html('');//清空富文本编辑器
+					}
 				}else{
 					alert(response.message);
 				}
@@ -147,6 +149,9 @@ app.controller('goodsController' ,function($scope,$controller ,$state,$statePara
 		itemCatService.findByParentId(n).success(
 			function (result) {
 				$scope.itemCat2List=result;
+				$scope.itemCat3List=null;
+				$scope.entity.goods.typeTemplateId=null;
+				$scope.typeTemplate={};
 			});
 	});
 

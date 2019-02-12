@@ -38,19 +38,16 @@
 		                           	  		<tr>
 		                           	  			<td class="col-md-3">
 		                           	  				<select class="form-control" ng-model="entity.goods.category1Id">
-														<option value="">-- 请选择一级 --</option>
 														<option ng-repeat="item in itemCat1List" value="{{item.id}}" ng-selected="item.id==entity.goods.category1Id">{{item.name}}</option>
 		                           	  				</select>
 		                              			</td>
 		                              			<td class="col-md-3">
 		                           	  				<select class="form-control select-sm" ng-model="entity.goods.category2Id">
-														<option value="">-- 请选择二级 --</option>
 														<option ng-repeat="item in itemCat2List" value="{{item.id}}" ng-selected="item.id==entity.goods.category2Id">{{item.name}}</option>
 													</select>
 		                              			</td>
 		                              			<td class="col-md-3">
 		                           	  				<select class="form-control select-sm" ng-model="entity.goods.category3Id">
-														<option value="">-- 请选择三级 --</option>
 														<option ng-repeat="item in itemCat3List" value="{{item.id}}" ng-selected="item.id==entity.goods.category3Id">{{item.name}}</option>
 													</select>
 		                              			</td>
@@ -71,7 +68,6 @@
 		                           <div class="col-md-2 title">品牌</div>
 		                           <div class="col-md-10 data">
 									   <select class="form-control select-sm" ng-model="entity.goods.brandId">
-										   <option value="">-- 请选择品牌 --</option>
 										   <option ng-repeat="item in typeTemplate.brandIds" value="{{item.id}}" ng-selected="item.id==entity.goods.brandId">{{item.text}}</option>
 									   </select>
 		                           </div>
@@ -230,7 +226,7 @@
                   <div class="btn-toolbar list-toolbar clearfix">
 					  <div class="pull-right">
 						  <button class="btn btn-primary " ng-click="save()"><i class="fa fa-save"></i> 保存</button>
-						  <a class="btn btn-default " href="#goods">返回列表</a>
+						  <a class="btn btn-default " href="#goods" ng-if="entity.goods.id">返回列表</a>
 					  </div>
 				  </div>
 			
