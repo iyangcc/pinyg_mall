@@ -16,6 +16,8 @@
         <module>mall_sellergoods_service</module>
         <module>mall_common</module>
         <module>mall_shop_web</module>
+        <module>mall_content_interface</module>
+        <module>mall_content_service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

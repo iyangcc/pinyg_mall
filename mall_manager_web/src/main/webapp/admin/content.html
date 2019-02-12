@@ -73,7 +73,7 @@
 									      <td>促销海报1</td>
 									      <td>http://wwww.hb.com/hd1.html</td>
 									      <td>
-									      	<img alt="" src="" width="100px" height="50px">
+											  <img alt="" src="{{entity.pic}}" height="50px" width="100px">
 									      </td>
 									      <td>1</td>
 									      <td>有效</td>									     								     
@@ -125,14 +125,11 @@
 		      		<td>
 						<table>
 							<tr>
+								<td>图片</td>
 								<td>
-								<input type="file" id="file" />				                
-					                <button class="btn btn-primary" type="button" >
-				                   		上传
-					                </button>	
-					            </td>
-								<td>
-									<img  src="{{entity.pic}}" width="200px" height="100px">
+									<input type="file" id="file">
+									<button ng-click="uploadFile()">上传</button>
+									<img alt="" src="{{entity.pic}}" height="100px" width="200px">
 								</td>
 							</tr>						
 						</table>
