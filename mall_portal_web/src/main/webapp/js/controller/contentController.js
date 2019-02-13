@@ -5,8 +5,6 @@ app.controller("contentController",function($scope,contentService){
 		contentService.findByCategoryId(categoryId).success(
 			function(response){
 				$scope.contentList[categoryId]=response;
-				$scope.contentList[1];
-				$scope.contentList[2];
 			}
 		);
 	}
