@@ -12,5 +12,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         }).state("goods", {
         url: "/goods",
         templateUrl: "admin/goods.html"
-    });
+        });
 });

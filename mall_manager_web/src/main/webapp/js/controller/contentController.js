@@ -2,6 +2,11 @@
 app.controller('contentController' ,function($scope,$controller   ,contentService,uploadService,contentCategoryService){
 	
 	$controller('baseController',{$scope:$scope});//继承
+
+	$scope.entity={};
+	$scope.searchEntity={};//定义搜索对象
+
+	$scope.status=["无效","有效"];
 	
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
@@ -63,8 +68,6 @@ app.controller('contentController' ,function($scope,$controller   ,contentServic
 			}		
 		);				
 	}
-	
-	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
 	$scope.search=function(page,rows){			

@@ -18,6 +18,7 @@
         <module>mall_shop_web</module>
         <module>mall_content_interface</module>
         <module>mall_content_service</module>
+        <module>mall_portal_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
