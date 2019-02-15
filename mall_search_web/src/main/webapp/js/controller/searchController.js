@@ -8,6 +8,7 @@ app.controller('searchController',function($scope,searchService){
         }else{
             $scope.searchMap.spec[key]=value;
         }
+        $scope.search();//执行搜索
     }
 
     //搜索
@@ -18,4 +19,15 @@ app.controller('searchController',function($scope,searchService){
             }
         );
     }
+
+    //移除复合搜索条件
+    $scope.removeSearchItem=function(key){
+        if(key=="category" ||  key=="brand"){//如果是分类或品牌
+            $scope.searchMap[key]="";
+        }else{//否则是规格
+            delete $scope.searchMap.spec[key];//移除此属性
+        }
+        $scope.search();//执行搜索
+    }
+
 });
