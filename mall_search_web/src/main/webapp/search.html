@@ -168,7 +168,7 @@
 				<div class="type-wrap" ng-if="resultMap.categoryList!=null">
 					<div class="fl key">商品分类</div>
 					<div class="fl value">
-					<span ng-repeat="category in resultMap.categoryList"><a href="#">{{category}}</a></span>
+					<span ng-repeat="category in resultMap.categoryList"><a href="#" ng-click="addSearchItem('category',category)"> {{category}} </a></span>
 					</div>
 					<div class="fl ext"></div>
 				</div>
@@ -207,7 +207,7 @@
 					<div class="value logos">
 						<ul class="logo-list">
 							<li ng-repeat="brand in resultMap.brandList" style="width: 101px;height: 52px; text-align: center;line-height: 52px;">
-								{{brand.text}}
+								<a href="#" ng-click="addSearchItem('brand',brand.text)">{{brand.text}}</a>
 							</li>
 						</ul>
 					</div>
@@ -297,7 +297,7 @@
 					<div class="fl value">
 						<ul class="type-list">
 							<li ng-repeat="pojo in spec.options">
-								<a>{{pojo.optionName}}</a>
+								<a href="#"  ng-click="addSearchItem(spec.text,pojo.optionName)">{{pojo.optionName}}</a>
 							</li>
 						</ul>
 					</div>
