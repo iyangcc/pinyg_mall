@@ -96,10 +96,36 @@ public class ItemSearchServiceImpl implements ItemSearchService {
                 Criteria filterCriteria=new Criteria("item_spec_"+key).is( specMap.get(key)  );
                 filterQuery.addCriteria(filterCriteria);
                 query.addFilterQuery(filterQuery);
-
             }
-
         }
+        //1.5按价格筛选
+        if(!"".equals(searchMap.get("price"))){
+            String[] price = ((String) searchMap.get("price")).split("-");
+            //起点如果不是0
+            if(!price[0].equals("0")){
+                Criteria filterCriteria = new Criteria("item_price").greaterThanEqual(price[0]);
+                FilterQuery filterQuery = new SimpleFilterQuery(filterCriteria);
+                query.addFilterQuery(filterQuery);
+            }
+            //如果区间终点不等于*
+            if(!price[1].equals("*")){
+                Criteria filterCriteria = new Criteria("item_price").lessThanEqual(price[1]);
+                SimpleFilterQuery filterQuery = new SimpleFilterQuery(filterCriteria);
+                query.addFilterQuery(filterQuery);
+            }
+        }
+        //1.6 分页查询
+        Integer pageNo= Integer.valueOf(searchMap.get("pageNo")+"");//提取页码
+        if(pageNo==null){
+            pageNo=1;//默认第一页
+        }
+        Integer pageSize=(Integer) searchMap.get("pageSize");//每页记录数
+        if(pageSize==null){
+            pageSize=20;//默认20
+        }
+        query.setOffset((pageNo-1)*pageSize);//从第几条记录查询10 10
+        query.setRows(pageSize);
+
 
         //***********  获取高亮结果集  ***********
         //高亮页对象
@@ -120,6 +146,8 @@ public class ItemSearchServiceImpl implements ItemSearchService {
             }
         }
         map.put("rows", page.getContent());
+        map.put("totalPages", page.getTotalPages());//返回总页数
+        map.put("total", page.getTotalElements());//返回总记录数
         return map;
 
     }
