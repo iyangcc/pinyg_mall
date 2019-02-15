@@ -19,6 +19,10 @@
         <module>mall_content_interface</module>
         <module>mall_content_service</module>
         <module>mall_portal_web</module>
+        <module>mall_solr_util</module>
+        <module>mall_search_interface</module>
+        <module>mall_search_service</module>
+        <module>mall_search_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
@@ -435,6 +439,12 @@
             <artifactId>solr-solrj</artifactId>
             <version>${solrj.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>1.5.5.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>com.janeluo</groupId>
             <artifactId>ikanalyzer</artifactId>

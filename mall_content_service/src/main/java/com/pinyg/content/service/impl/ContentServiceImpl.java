@@ -105,7 +105,7 @@ public class ContentServiceImpl implements ContentService {
 		TbContentExample example=new TbContentExample();
 		Criteria criteria = example.createCriteria();
 		
-		if(content!=null){			
+		if(content!=null){
 						if(content.getTitle()!=null && content.getTitle().length()>0){
 				criteria.andTitleLike("%"+content.getTitle()+"%");
 			}
