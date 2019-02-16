@@ -218,7 +218,7 @@ ul.logo-list li {
 }
 
 .page {
-	width: 780px;
+	max-width: 811px;
 	height: 66px;
 	overflow: hidden
 }
@@ -232,14 +232,14 @@ ul.logo-list li {
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-	width: 490px;
+	max-width: 570px;
 	float: left
 }
 
 .sui-pagination ul>.active>a {
 	background-color: #fff;
 	color: #c81623;
-	border-color: #fff;
+	border-color: #e0e9ee;
 	cursor: default
 }
 

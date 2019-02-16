@@ -1,6 +1,6 @@
 app.controller('searchController',function($scope,searchService){
 
-    $scope.searchMap={'keywords':'','category':'','brand':'','spec':{},'price':'','pageNo':1,'pageSize':40};//搜索对象
+    $scope.searchMap={'keywords':'','category':'','brand':'','spec':{},'price':'','pageNo':1,'pageSize':40,'sortField':'','sort':'' };//搜索对象
     //添加搜索项
     $scope.addSearchItem=function(key,value){
         if(key=='category' || key=='brand' || key=='price'){//如果点击的是分类或者是品牌
@@ -90,5 +90,21 @@ app.controller('searchController',function($scope,searchService){
         }
     }
 
+    //设置排序查询
+    $scope.sortSearch=function (sortField,sort) {
+        $scope.searchMap.sortField = sortField;
+        $scope.searchMap.sort = sort;
+        $scope.search();
+    }
+
+    //判断关键字是不是品牌
+    $scope.keywordsIsBrand=function () {
+        for(var i=0;i<$scope.resultMap.brandList.length;i++){
+            if($scope.searchMap.keywords.indexOf($scope.resultMap.brandList[i]).text>=0){
+                return true;
+            }
+        }
+        return false;
+    }
 
 });
