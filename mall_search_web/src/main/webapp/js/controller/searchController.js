@@ -1,4 +1,4 @@
-app.controller('searchController',function($scope,searchService){
+app.controller('searchController',function($scope,$location,searchService){
 
     $scope.searchMap={'keywords':'','category':'','brand':'','spec':{},'price':'','pageNo':1,'pageSize':40,'sortField':'','sort':'' };//搜索对象
     //添加搜索项
@@ -105,6 +105,12 @@ app.controller('searchController',function($scope,searchService){
             }
         }
         return false;
+    }
+
+    //加载查询字符串
+    $scope.loadkeywords=function(){
+        $scope.searchMap.keywords=  $location.search()['keywords'];
+        $scope.search();
     }
 
 });
