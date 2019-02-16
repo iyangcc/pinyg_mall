@@ -1,8 +1,5 @@
 package com.pinyg.sellergoods.service.impl;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.alibaba.dubbo.common.json.ParseException;
 import com.alibaba.fastjson.JSON;
@@ -228,6 +225,15 @@ public class GoodsServiceImpl implements GoodsService {
 			goods.setAuditStatus(status);
 			goodsMapper.updateByPrimaryKey(goods);
 		}
+	}
+
+	@Override
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] goodsIds, String status) {
+		TbItemExample example=new TbItemExample();
+		TbItemExample.Criteria criteria = example.createCriteria();
+		criteria.andGoodsIdIn(Arrays.asList(goodsIds));
+		criteria.andStatusEqualTo(status);
+		return itemMapper.selectByExample(example);
 	}
 
 

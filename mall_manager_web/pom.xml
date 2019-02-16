@@ -38,6 +38,11 @@
             <artifactId>mall_content_interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.iyang</groupId>
+            <artifactId>mall_search_interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

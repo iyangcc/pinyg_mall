@@ -4,6 +4,7 @@ import java.util.List;
 import com.alibaba.dubbo.common.json.ParseException;
 import com.pinyg.pojo.TbGoods;
 
+import com.pinyg.pojo.TbItem;
 import com.pinyg.pojogroup.Goods;
 import entity.PageResult;
 /**
@@ -68,5 +69,12 @@ public interface GoodsService {
 	 */
 	public void updateStatus(Long []ids,String status);
 
+	/**
+	 * 根据商品ID和状态查询Item表信息
+	 * @param goodsIds
+	 * @param status
+	 * @return
+	 */
+	public List<TbItem> findItemListByGoodsIdAndStatus(Long[] goodsIds, String status );
 
 }
