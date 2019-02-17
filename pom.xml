@@ -23,6 +23,9 @@
         <module>mall_search_interface</module>
         <module>mall_search_service</module>
         <module>mall_search_web</module>
+        <module>mall_page_interface</module>
+        <module>mall_page_service</module>
+        <module>mall_page_web</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

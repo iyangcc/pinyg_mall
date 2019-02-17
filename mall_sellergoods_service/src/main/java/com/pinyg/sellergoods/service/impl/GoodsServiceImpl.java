@@ -3,7 +3,6 @@ import java.util.*;
 
 import com.alibaba.dubbo.common.json.ParseException;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.pinyg.mapper.*;
 import com.pinyg.pojo.*;
 import com.pinyg.pojogroup.Goods;
