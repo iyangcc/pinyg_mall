@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
@@ -77,9 +79,11 @@ public class ItemPageServiceImpl implements ItemPageService {
             List<TbItem> itemList = itemMapper.selectByExample(example);
             dataModel.put("itemList", itemList);
 
-            Writer out=new FileWriter(pagedir+goodsId+".html");
-
-            template.process(dataModel, out);//输出
+//            Writer out=new FileWriter(pagedir+goodsId+".html");
+            FileOutputStream out=new FileOutputStream(pagedir+goodsId+".html");
+            OutputStreamWriter writer = new OutputStreamWriter(out, "utf-8");
+            template.process(dataModel, writer);//输出
+            writer.close();
             out.close();
             return true;
 

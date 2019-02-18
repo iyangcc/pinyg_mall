@@ -90,7 +90,7 @@
 						<div class="fl title">
 							<i>价　　格</i>
 						</div>
-						<div class="fl price"><i>¥</i><em>{{sku.price}}</em><span>降价通知</span></div>
+						<div class="fl price"><i>?</i><em>{{sku.price}}</em><span>降价通知</span></div>
 						<div class="fr remark">
 							<i>累计评价</i><em>612188</em>
 						</div>
@@ -206,7 +206,7 @@
 									</div>
 									<div class="price">
 										<strong>
-											<em>¥</em>
+											<em>?</em>
 											<i>6088.00</i>
 										</strong>
 									</div>
@@ -225,7 +225,7 @@
 									</div>
 									<div class="price">
 										<strong>
-											<em>¥</em>
+											<em>?</em>
 											<i>6088.00</i>
 										</strong>
 									</div>
@@ -244,7 +244,7 @@
 									</div>
 									<div class="price">
 										<strong>
-											<em>¥</em>
+											<em>?</em>
 											<i>6088.00</i>
 										</strong>
 									</div>
@@ -261,7 +261,7 @@
 									</div>
 									<div class="price">
 										<strong>
-											<em>¥</em>
+											<em>?</em>
 											<i>6088.00</i>
 										</strong>
 									</div>
@@ -278,7 +278,7 @@
 									</div>
 									<div class="price">
 										<strong>
-											<em>¥</em>
+											<em>?</em>
 											<i>6088.00</i>
 										</strong>
 									</div>
@@ -419,7 +419,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>3699.00</i>
 								</strong>
 							</div>
@@ -438,7 +438,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>4388.00</i>
 								</strong>
 							</div>
@@ -457,7 +457,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>4088.00</i>
 								</strong>
 							</div>
@@ -476,7 +476,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>4088.00</i>
 								</strong>
 							</div>
@@ -495,7 +495,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>4088.00</i>
 								</strong>
 							</div>
@@ -514,7 +514,7 @@
 							</div>
 							<div class="price">
 								<strong>
-									<em>¥</em>
+									<em>?</em>
 									<i>4088.00</i>
 								</strong>
 							</div>
@@ -563,7 +563,7 @@
 					<div id="cart-footer" class="tbar-panel-footer J-panel-footer">
 						<div class="tbar-checkout">
 							<div class="jtc-number"> <strong class="J-count" id="cart-number">0</strong>件商品 </div>
-							<div class="jtc-sum"> 共计：<strong class="J-total" id="cart-sum">¥0</strong> </div>
+							<div class="jtc-sum"> 共计：<strong class="J-total" id="cart-sum">?0</strong> </div>
 							<a class="jtc-btn J-btn" href="#none" target="_blank">去购物车结算</a>
 						</div>
 					</div>
@@ -661,7 +661,7 @@
 			<div class="p-name">
 				<a href="#">{1}</a>
 			</div>
-			<div class="p-price"><strong>¥{3}</strong>×{4} </div>
+			<div class="p-price"><strong>?{3}</strong>×{4} </div>
 			<a href="#none" class="p-del J-del">删除</a>
 		</div>
 	</div>
