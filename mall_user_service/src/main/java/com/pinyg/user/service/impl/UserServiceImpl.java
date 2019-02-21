@@ -1,6 +1,24 @@
 package com.pinyg.user.service.impl;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.Session;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyg.mapper.TbUserMapper;
@@ -8,13 +26,8 @@ import com.pinyg.pojo.TbUser;
 import com.pinyg.pojo.TbUserExample;
 import com.pinyg.pojo.TbUserExample.Criteria;
 import com.pinyg.user.service.UserService;
-import entity.PageResult;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import entity.PageResult;
 
 /**
  * 服务实现层
@@ -22,12 +35,26 @@ import java.util.List;
  *
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private TbUserMapper userMapper;
-	
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+
+	@Autowired
+	private JmsTemplate jmsTemplate;
+
+	@Autowired
+	private Destination smsDestination;
+
+	@Value("${template_code}")
+	private String template_code;
+
+	@Value("${sign_name}")
+	private String sign_name;
+
 	/**
 	 * 查询全部
 	 */
@@ -41,7 +68,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
+		PageHelper.startPage(pageNum, pageSize);
 		Page<TbUser> page=   (Page<TbUser>) userMapper.selectByExample(null);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
@@ -51,34 +78,25 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void add(TbUser user) {
-		user.setCreated(new Date());//创建日期
-		user.setUpdated(new Date());//修改日期
-		String password = DigestUtils.md5Hex(user.getPassword());//对密码加密
-		user.setPassword(password);
+		user.setCreated(new Date());//用户注册时间
+		user.setUpdated(new Date());//修改时间
+		user.setSourceType("1");//注册来源
+		user.setPassword( DigestUtils.md5Hex(user.getPassword()));//密码加密
 		userMapper.insert(user);
 	}
 
-	
+
 	/**
 	 * 修改
 	 */
 	@Override
 	public void update(TbUser user){
 		userMapper.updateByPrimaryKey(user);
-	}	
-	
-	/**
-	 * 根据ID获取实体
-	 * @param username
-	 * @return
-	 */
+	}
+
 	@Override
-	public TbUser findOne(String username){
-		TbUserExample example=new TbUserExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andUsernameEqualTo(username);
-		List<TbUser> tbUsers = userMapper.selectByExample(example);
-		return tbUsers.size()>0?tbUsers.get(0):null;
+	public TbUser findOne(String username) {
+		return null;
 	}
 
 	/**
@@ -88,19 +106,18 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long[] ids) {
 		for(Long id:ids){
 			userMapper.deleteByPrimaryKey(id);
-		}		
+		}
 	}
-	
-	
-		@Override
+
+	@Override
 	public PageResult findPage(TbUser user, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		
+
 		TbUserExample example=new TbUserExample();
 		Criteria criteria = example.createCriteria();
-		
-		if(user!=null){			
-						if(user.getUsername()!=null && user.getUsername().length()>0){
+
+		if(user!=null){
+			if(user.getUsername()!=null && user.getUsername().length()>0){
 				criteria.andUsernameLike("%"+user.getUsername()+"%");
 			}
 			if(user.getPassword()!=null && user.getPassword().length()>0){
@@ -139,11 +156,49 @@ public class UserServiceImpl implements UserService {
 			if(user.getSex()!=null && user.getSex().length()>0){
 				criteria.andSexLike("%"+user.getSex()+"%");
 			}
-	
+
 		}
-		
-		Page<TbUser> page= (Page<TbUser>)userMapper.selectByExample(example);		
+
+		Page<TbUser> page= (Page<TbUser>)userMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public void createSmsCode(final String phone) {
+		//1.生成一个6位随机数（验证码）
+		final String smscode=  (long)(Math.random()*1000000)+"";
+		System.out.println("验证码："+smscode);
+
+		//2.将验证码放入redis
+		redisTemplate.boundHashOps("smscode").put(phone, smscode);
+		//3.将短信内容发送给activeMQ
+
+		jmsTemplate.send(smsDestination, new MessageCreator() {
+
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				MapMessage message = session.createMapMessage();
+				message.setString("mobile", phone);//手机号
+				message.setString("template_code", template_code);//验证码
+				message.setString("sign_name", sign_name);//签名
+				Map map=new HashMap();
+				map.put("number", smscode);
+				message.setString("param", JSON.toJSONString(map));
+				return message;
+			}
+		});
+	}
+
+	@Override
+	public boolean checkSmsCode(String phone, String code) {
+		String systemcode= (String) redisTemplate.boundHashOps("smscode").get(phone);
+		if(systemcode==null){
+			return false;
+		}
+		if(!systemcode.equals(code)){
+			return false;
+		}
+		return true;
 	}
 
 }
