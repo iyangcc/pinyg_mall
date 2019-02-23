@@ -17,8 +17,6 @@ import java.util.Map;
 
 /**
  * controller
- * @author Administrator
- *
  */
 @RestController
 @RequestMapping("/user")

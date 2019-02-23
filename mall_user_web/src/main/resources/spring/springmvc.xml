@@ -25,7 +25,6 @@
 	    </bean>
 	  </mvc:message-converters>  
 	</mvc:annotation-driven>
-	
 
 	<!-- 引用dubbo 服务 -->
 	<dubbo:application name="mall_user_web" />

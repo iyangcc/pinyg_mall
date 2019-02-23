@@ -25,12 +25,10 @@ app.controller('userController' ,function($scope,$controller   ,userService){
 			alert("请填写手机号码");
 			return ;
 		}
-		
 		userService.sendCode($scope.entity.phone  ).success(
 			function(response){
 				alert(response.message);
 			}
 		);		
 	}
-	
 });	

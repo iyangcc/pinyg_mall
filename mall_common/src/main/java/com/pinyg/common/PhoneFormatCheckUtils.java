@@ -23,8 +23,9 @@ public class PhoneFormatCheckUtils {
      * 147 
      */  
     public static boolean isChinaPhoneLegal(String str) throws PatternSyntaxException {  
-        String regExp = "^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$";  
-        Pattern p = Pattern.compile(regExp);  
+//        String regExp = "^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$";
+        String regExp = "^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\\d{8}$";
+        Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(str);  
         return m.matches();  
     }  
