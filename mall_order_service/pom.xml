@@ -10,19 +10,9 @@
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall_cart_web</artifactId>
+    <artifactId>mall_order_service</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.iyang</groupId>
-            <artifactId>mall_cart_interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.iyang</groupId>
-            <artifactId>mall_user_interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.iyang</groupId>
             <artifactId>mall_order_interface</artifactId>
@@ -31,6 +21,11 @@
         <dependency>
             <groupId>com.iyang</groupId>
             <artifactId>mall_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.iyang</groupId>
+            <artifactId>mall_dao</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
