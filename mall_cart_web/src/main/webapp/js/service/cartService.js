@@ -23,7 +23,28 @@ app.service('cartService',function($http){
 			}			
 		}
 		return totalValue;
-		
 	}
-	
+
+	this._findProvinceList=function () {
+		return $http.get('address/findProvinceList.do');
+	}
+
+	this._findCityList=function (id) {
+		return $http.get('address/findCityList.do?id='+id);
+	}
+
+	this._findAreasList=function (id) {
+		return $http.get('address/findAreasList.do?id='+id);
+	}
+
+	//添加地址
+	this.add=function (address) {
+		return $http.post('address/add.do',address);
+	}
+
+	//获取地址列表
+	this._findAddressList=function(){
+		return $http.get('address/findListByLoginUser.do');
+	}
+
 });
